@@ -483,6 +483,7 @@ public class CorralListener implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         if(event.getEntity() instanceof Horse) {
             Horse horse = (Horse)event.getEntity();
+            if (horse.getOwner() == null) return; //fix for skeletal horses, which are tamed with no owner on spawn in 1.9
             AnimalTamer owner = horse.getOwner();
             String passenger = (horse.getPassenger() == null ? "" : horse.getPassenger() instanceof Player ? ((Player)horse.getPassenger()).getName() : horse.getPassenger().toString());
             String causedBy = (horse.getKiller() == null ? "the environment" : horse.getKiller().getName());
